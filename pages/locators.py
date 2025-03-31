@@ -7,3 +7,7 @@ class MainPageLocators():
 class LoginPageLocators ():
     LOGIN_EMAIL_INPUT = (By.CSS_SELECTOR, "#id_login-username")
     LOGIN_PASS_INPUT = (By.CSS_SELECTOR, "#id_login-password")
+
+
+class ProductPageLocators():
+    BUSKET_BUTTON_ADD = (By.CSS_SELECTOR, "button.btn-add-to-basket")
