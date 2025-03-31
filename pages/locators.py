@@ -11,3 +11,7 @@ class LoginPageLocators ():
 
 class ProductPageLocators():
     BUSKET_BUTTON_ADD = (By.CSS_SELECTOR, "button.btn-add-to-basket")
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link")
