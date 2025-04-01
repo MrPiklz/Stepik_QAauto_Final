@@ -1,15 +1,13 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
+
 from selenium.common.exceptions import NoAlertPresentException # в начале файла
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 import time
 import math
 
 
 class ProductPage(BasePage):
-    
     
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
@@ -24,12 +22,29 @@ class ProductPage(BasePage):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
-        
-    
+  
 
-    def test_add_busket_clove_quize(self):
+    def test_add_busket_slove_quize(self):
         self.browser.delete_all_cookies()
         #WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "verify")))
         self.browser.find_element(*ProductPageLocators.BUSKET_BUTTON_ADD).click()
         self.solve_quiz_and_get_code()
-        time.sleep(3)
+        time.sleep(2)
+        
+    def test_check_price_after_adding_in_basket_product(self):
+        assert self.browser.find_element(*ProductPageLocators.PRICE_OF_PRODUCT).text == self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT_AFTER_ADDED_IN_BASKET).text, "bad:("
+    
+    def test_check_name_after_adding_in_basket_product(self):
+        assert self.browser.find_element(*ProductPageLocators.NAME_OF_PRODUCT).text == self.browser.find_element(*ProductPageLocators.NAME_OF_PRODUCT_AFTER_ADD_IN_BUSKET).text, "not found name"
+        
+    def test_guest_can_add_product_to_basket(self): ##CHECK add product in basket by name and price
+#       self.browser.delete_all_cookies()
+        #WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.ID, "verify")))
+        price = self.browser.find_element(*ProductPageLocators.PRICE_OF_PRODUCT).text
+        self.browser.find_element(*ProductPageLocators.BUSKET_BUTTON_ADD).click()
+        self.test_check_price_after_adding_in_basket_product()  #check by price
+        self.test_check_name_after_adding_in_basket_product()   #check by name
+    
+    def test_cant_see_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCSEES_MESSAGE_AFTER_ADD_PRODUCT_IN_BASKET)
+
