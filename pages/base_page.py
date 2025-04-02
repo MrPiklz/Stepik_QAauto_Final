@@ -8,11 +8,11 @@ from .locators import BasePageLocators
 
 class BasePage():
 
-    def __init__(self, browser, url, timeout=3):
+    def __init__(self, browser, url, timeout=3):  #общая инициализация браузера
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
-    
+        
     def open(self):
         self.browser.get(self.url)
         
@@ -38,10 +38,10 @@ class BasePage():
             return True
         return False
         
-    def should_be_authorized_user(self):
+    def should_be_authorized_user(self): #проверка что пользователь авторизирова, путем проверки наличия иконки авторизированного пользователя
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
                                                                  " probably unauthorised user"
     
-    def go_to_basket_page(self):
+    def go_to_basket_page(self): #перейти в корзину
         self.browser.find_element(*BasePageLocators.BUTTON_BASKET).click()
         
