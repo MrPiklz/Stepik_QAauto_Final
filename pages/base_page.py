@@ -2,13 +2,15 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.webdriver import WebDriver
+
 
 from .locators import BasePageLocators
 
 
 class BasePage():
 
-    def __init__(self, browser, url, timeout=3):  #общая инициализация браузера
+    def __init__(self, browser: WebDriver, url, timeout=3):  #общая инициализация браузера
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
