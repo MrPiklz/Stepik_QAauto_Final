@@ -39,6 +39,7 @@ def test_guest_can_add_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     page = ProductPage(browser, link)
     page.open()
+    time.sleep(1)
     page.test_guest_can_add_product_to_basket_in()
 
 def test_guest_cant_see_success_message (browser):
